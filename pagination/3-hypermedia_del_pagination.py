@@ -14,6 +14,7 @@ class Server:
     DATA_FILE = "Popular_Baby_Names.csv"
 
     def __init__(self):
+        """Initialize class"""
         self.__dataset = None
         self.__indexed_dataset = None
 
@@ -41,11 +42,7 @@ class Server:
 
         return self.__indexed_dataset
 
-    def get_hyper_index(
-        self,
-        index: int = None,
-        page_size: int = 10
-    ) -> Dict:
+    def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
         """
         Return hypermedia pagination dictionary.
         """
@@ -55,17 +52,17 @@ class Server:
         assert 0 <= index < len(dataset)
 
         data = []
-        current_index = index
+        next_index = index
 
         while len(data) < page_size:
-            if current_index in dataset:
-                data.append(dataset[current_index])
+            if next_index in dataset:
+                data.append(dataset[next_index])
 
-            current_index += 1
+            next_index += 1
 
         return {
             "index": index,
             "data": data,
             "page_size": len(data),
-            "next_index": current_index
+            "next_index": next_index
         }
