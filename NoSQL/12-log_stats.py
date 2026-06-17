@@ -6,10 +6,7 @@ Nginx log statistics from MongoDB
 from pymongo import MongoClient
 
 
-def main():
-    """
-    Main function that prints Nginx log statistics from MongoDB.
-    """
+if __name__ == "__main__":
     client = MongoClient("mongodb://127.0.0.1:27017")
     collection = client.logs.nginx
 
@@ -22,7 +19,7 @@ def main():
 
     for method in methods:
         count = collection.count_documents({"method": method})
-        print(f"\tmethod {method}: {count}")
+        print(f"method {method}: {count}")
 
     status_check = collection.count_documents({
         "method": "GET",
@@ -30,7 +27,3 @@ def main():
     })
 
     print(f"{status_check} status check")
-
-
-if __name__ == "__main__":
-    main()
