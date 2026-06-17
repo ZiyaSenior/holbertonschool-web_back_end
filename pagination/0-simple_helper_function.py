@@ -1,1 +1,11 @@
-items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+#!/usr/bin/env python3
+"""
+Simple helper function for pagination
+"""
+
+
+def index_range(page: int, page_size: int) -> tuple:
+    """Return a tuple containing start and end indexes."""
+    start = (page - 1) * page_size
+    end = start + page_size
+    return (start, end)
