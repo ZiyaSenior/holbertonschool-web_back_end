@@ -6,6 +6,8 @@ process.stdin.on('data', (data) => {
   process.stdout.write(`Your name is: ${data.trim()}\n`);
 });
 
-process.stdin.on('end', () => {
-  process.stdout.write('This important software is now closing\n');
-});
+if (!process.stdin.isTTY) {
+  process.stdin.on('end', () => {
+    process.stdout.write('This important software is now closing\n');
+  });
+}
